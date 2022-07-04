@@ -1,4 +1,4 @@
-# <LOVE PARKING CLUB>
+# LOVE PARKING CLUB
 
 ## サイト概要
 人に教えたくなるコインパーキングをシェアするコミュニティサイト

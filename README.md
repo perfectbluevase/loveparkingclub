@@ -1,24 +1,44 @@
-# README
+# <LOVE PARKING CLUB>
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+人に教えたくなるコインパーキングをシェアするコミュニティサイト
 
-Things you may want to cover:
+### サイトテーマ
+「パーキングを探している人」ではなく「パーキングを教えたい人」が主役
+「観光地から少し遠いけど安すぎる！」「こんな裏路地に実はあった！」など
+おもわず人に教えたくなるパーキングを見つけた時にアウトプットの場としてご活用ください。
+もちろん、パーキングを探している人にも便利な情報が盛りだくさん。
+ドライブにおすすめのSpotifyプレイリストも毎月更新（予定）
 
-* Ruby version
 
-* System dependencies
+### テーマを選んだ理由
+前職、コロナ禍の影響で電車通勤から車通勤になった際
+経費をなるべく抑えるため可能な限りお金のかからないパーキングに停めるというミッションが発生。
+しかし職場は駅・大型商業施設が立ち並ぶ主要都市・・・
+打ち切りは2,000円越えが当たり前、打ち切りがないコインパーキングも多くミッションは難航しました。
 
-* Configuration
+そんな中、私が発見したのはなんと【24時間打ち切り400円】の破格パーキング！
+こじんまりとしたその駐車場、職場からは若干距離があり、停めれる台数も限られていますが
+あまりに良心的な価格に打ちひしがれ、涙を流し、歓喜しました。
+そして同時に「このようなパーキング、みんなに教えたい！！！」と思いました。
 
-* Database creation
+こうしたちょっと人に教えたくなる「穴場パーキング」は実はたくさんあり
+それを見つけた人はきっと私と同じくシェアしたい衝動にかられているはず・・・
+そんな"PARKING LOVER"のアウトプットの場が必要だったのです。
 
-* Database initialization
 
-* How to run the test suite
+### ターゲットユーザ
+車を利用する全性別・年齢対象
 
-* Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions
+### 主な利用シーン
+穴場駐車場を見つけた時
+観光地に出かけた時
 
-* ...
+
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9

@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
 
-  get 'homes/top'
-  get 'homes/about'
-  get 'homes/index'
-  get 'homes/show'
+#ルーティングページの設定
+root to: 'homes#top'
+
+get "/homes/about" => "homes#about", as: "about"
+
 #ユーザー側のdeviseルーティング
 #skipでユーザー側の新規登録とパスワード変更のルーティングを削除
 devise_for :users, skip: [:passwords], controllers: {

@@ -1,2 +1,20 @@
 <h1>Public::Parkings#new</h1>
 <p>Find me in app/views/public/parkings/new.html.erb</p>
+
+<h1>新規駐車場情報登録</h1>
+<%= form_with model: @parking do |f| %>
+  <h4>駐車場の写真</h4>
+    <%= f.file_field :image, accept: "image/*" %>
+  <h4>駐車場名</h4>
+    <%= f.text_field :parking_name %>
+  <h4>住所</h4>
+    <%= f.text_area :parking_address %>
+  <h4>運営会社</h4>
+    <%= f.text_field :parking_operator %>
+  <h4>詳細</h4>
+    <h6>料金詳細や利用可能台数など</h6>
+      <%= f.text_area :parking_fee_info %>
+  <h4>駐車場についてのコメント</h4>
+    <%= f.text_area :parking_review %>
+  <%= f.submit '投稿' %>
+<% end %>

@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
          
   #Parkingのアソシエーション
-  has_many :parkings, dependent: :destory
+  has_many :parkings, dependent: :destroy
   #PostCommentのアソシエーション
   has_many :post_comments, dependent: :destroy
   #Bookmarkのアソシエーション

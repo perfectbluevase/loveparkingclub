@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  namespace :public do
+    get 'parkings/new'
+    get 'parkings/index'
+    get 'parkings/show'
+    get 'parkings/destroy'
+  end
 #ルーティングページの設定
 root to: 'homes#top'
 

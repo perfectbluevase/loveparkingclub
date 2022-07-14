@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'parkings/show'
     get 'parkings/destroy'
   end
+  
 #ルーティングページの設定
 root to: 'homes#top'
 

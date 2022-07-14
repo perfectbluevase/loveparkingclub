@@ -7,7 +7,7 @@ class Public::ParkingsController < ApplicationController
     @parking = Parking.new(parking_params)
     @parking.user_id = current_user.id
     @parking.save
-    redirect_to parking_path
+    redirect_to public_parking_path
   end
 
   def index

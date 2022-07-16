@@ -3,6 +3,7 @@
   <%= image_tag @user.get_profile_image(100,100) %>
   <p>ユーザーネーム： <%= @user.user_name %></p>
   <p>自己紹介文： <%= @user.biography %></p>
+  <p><%= link_to "プロフィール編集", edit_public_user_path %></p>
 </div>
 
 <!-- ユーザーの投稿一覧 -->

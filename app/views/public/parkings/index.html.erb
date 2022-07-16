@@ -1,0 +1,15 @@
+<h1><%= current_user %> さんの駐車場情報一覧</h1>
+
+<% @parkings.each do |parking| %>
+<div>
+  <p>駐車場名：
+  <%= link_to public_parking_path(parking.id) do %>
+    <%= parking.parking_name %>
+  <% end %>
+  </p>
+  <p>住所：<%= parking.parking_address %></p>
+  <p>運営会社：<%= parking.parking_operator %></p>
+  <p>詳細：<%= parking.parking_fee_info %></p>
+  <p>駐車場についてのコメント：<%= parking.parking_review %></p>
+</div>
+<% end %>

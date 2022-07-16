@@ -20,6 +20,9 @@ class Public::ParkingsController < ApplicationController
   end
 
   def destroy
+    @parking = Parking.find(params[:id])
+    @parking.destroy
+    redirect_to public_parking_path
   end
 
   private

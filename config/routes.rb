@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 namespace :public do
-  resources :parkings, only: [:new, :create, :index, :show ]
+  resources :parkings#, only: [:new, :create, :index, :show, :destory]
 end
 
 #ルーティングページの設定

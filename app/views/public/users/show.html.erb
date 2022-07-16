@@ -5,7 +5,9 @@
   <p>年齢： <%= @user.age_type %></p>
   <p>住まい： <%= @user.living_prefecture %></p>
   <p>自己紹介文： <%= @user.biography %></p>
+  <% if @user == current_user %>
   <p><%= link_to "プロフィール編集", edit_public_user_path %></p>
+  <% end %>
 </div>
 
 <!-- ユーザーの投稿一覧 -->

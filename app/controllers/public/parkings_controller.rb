@@ -16,6 +16,7 @@ class Public::ParkingsController < ApplicationController
   end
 
   def show
+    @parking = Parking.find(params[:id])
   end
 
   def destroy

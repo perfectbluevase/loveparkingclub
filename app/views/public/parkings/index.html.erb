@@ -2,10 +2,11 @@
 
 <% @parkings.each do |parking| %>
 <div>
-  
-  <%= image_tag parking.get_image %>
-  <p>プロフィール画像：<%= image_tag 'sample-author1.jpg' %></p>
-  <p>駐車場名：<%= parking.parking_name %></p>
+  <p>駐車場名：
+  <%= link_to public_parking_path(parking.id) do %>
+    <%= parking.parking_name %>
+  <% end %>
+  </p>
   <p>住所：<%= parking.parking_address %></p>
   <p>運営会社：<%= parking.parking_operator %></p>
   <p>詳細：<%= parking.parking_fee_info %></p>

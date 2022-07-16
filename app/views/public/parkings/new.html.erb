@@ -1,6 +1,6 @@
 
 <h1>新規駐車場情報登録</h1>
-<%= form_with model: @parking do |f| %>
+<%= form_with model: @parking, url:public_parkings_path do |f| %>
   <h4>駐車場の写真</h4>
     <%= f.file_field :image, accept: "image/*" %>
   <h4>駐車場名</h4>

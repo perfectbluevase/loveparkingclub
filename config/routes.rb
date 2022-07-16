@@ -1,16 +1,11 @@
 Rails.application.routes.draw do
 
-  namespace :public do
-    get 'parkings/new'
-    get 'parkings/index'
-    get 'parkings/show'
-    get 'parkings/destroy'
-  end
-  
+namespace :public do
+  resources :parkings, only: [:new, :create, :index, :show ]
+end
+
 #ルーティングページの設定
 root to: 'homes#top'
-
-resources :parkings, only: [:new, :create, :index, :show ]
 
 get "/homes/about" => "homes#about", as: "about"
 

@@ -16,9 +16,9 @@
     <%= link_to "削除", public_parking_path(@parking), method: :delete, "data-confirm" => "本当に削除しますか？" %>
     
     <% if @parking.bookmarked_by?(current_user) %>
-      <td><%= link_to "ブックマークを外す", public_parking_bookmarks_path(@parking), method: :delete %></td>
+      <td><%= link_to "★", public_parking_bookmarks_path(@parking), method: :delete %></td>
     <% else %>
-      <td><%= link_to "ブックマーク", public_parking_bookmarks_path(@parking), method: :post %></td>
+      <td><%= link_to "☆", public_parking_bookmarks_path(@parking), method: :post %></td>
     <% end %>
     
   <% end %>

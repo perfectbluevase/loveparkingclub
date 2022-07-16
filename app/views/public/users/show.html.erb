@@ -25,29 +25,13 @@
   <p>詳細：<%= parking.parking_fee_info %></p>
   <p>駐車場についてのコメント：<%= parking.parking_review %></p>
 </div>
+<% end %>
 
-<table>
-  <caption>ブックマーク一覧</caption>
-  <thead>
-    <tr>
-      <th>投稿者名</th>
-      <th>タイトル</th>
-      <th>本文</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @bookmarks.each do |bookmark| %>
-      <tr>
-        <td><%= bookmark.parking.user.user_name %></td>
-        <td>
-          <%= link_to public_parking_path(bookmark.parking) do %>
-            <%= bookmark.parking.parking_name %>
-          <% end %>
-        </td>
-        <td><%= bookmark.parking.parking_name %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<h3>ブックマーク一覧</h3>
+<% @bookmarks.each do |bookmark| %>
+<p>
+<%= link_to public_parking_path(bookmark.parking) do %>
+  <%= bookmark.parking.parking_name %>
+<% end %>
+</p>
 <% end %>

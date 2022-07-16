@@ -16,3 +16,18 @@
     <%= link_to "削除", public_parking_path(@parking), method: :delete, "data-confirm" => "本当に削除しますか？" %>
   <% end %>
 </div>
+
+<div>
+  <p>コメント件数：<%= @parking.post_comments.count %></p>
+  <% @parking.post_comments.each do |post_comment| %>
+    <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
+    <%= post_comment.user.user_name %>
+    <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+  <% end %>
+</div>
+<div>
+  <%= form_with model: [@parking, @post_comment],url: public_parkings_path do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>

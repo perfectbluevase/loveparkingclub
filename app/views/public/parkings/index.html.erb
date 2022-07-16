@@ -11,5 +11,6 @@
   <p>運営会社：<%= parking.parking_operator %></p>
   <p>詳細：<%= parking.parking_fee_info %></p>
   <p>駐車場についてのコメント：<%= parking.parking_review %></p>
+  <p><%= link_to "#{parking.post_comments.count} コメント", public_parking_path(parking.id) %></p>
 </div>
 <% end %>

@@ -1,4 +1,4 @@
-<!-- ユーザーの詳細 -->
+
 <div>
   <%= image_tag @user.get_profile_image(100,100) %>
   <p>ユーザーネーム： <%= @user.user_name %></p>
@@ -9,8 +9,6 @@
   <p><%= link_to "プロフィール編集", edit_public_user_path %></p>
   <% end %>
 </div>
-
-<!-- ユーザーの投稿一覧 -->
 
 <h3>投稿一覧</h3>
 <% @parkings.each do |parking| %>
@@ -24,5 +22,6 @@
   <p>運営会社：<%= parking.parking_operator %></p>
   <p>詳細：<%= parking.parking_fee_info %></p>
   <p>駐車場についてのコメント：<%= parking.parking_review %></p>
+   <p><%= link_to "#{parking.post_comments.count} コメント", public_parking_path(parking.id) %></p>
 </div>
 <% end %>

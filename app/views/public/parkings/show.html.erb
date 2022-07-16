@@ -12,6 +12,7 @@
   <p>ユーザー年齢：<%= @parking.user.age_type %></p>
   <p>ユーザーの住まい：<%= @parking.user.living_prefecture %></p>
   <% if @parking.user == current_user %>
+    <%= link_to "編集", edit_public_parking_path(@parking) %>
     <%= link_to "削除", public_parking_path(@parking), method: :delete, "data-confirm" => "本当に削除しますか？" %>
   <% end %>
 </div>

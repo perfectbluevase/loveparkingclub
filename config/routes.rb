@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 namespace :public do
-  resources :parkings#, only: [:new, :create, :index, :show, :destory]
+  resources :parkings#, only: [:new, :create, :index, :show, :destory] *onlyを指定するとdestroyが認識されない
   resources :users, only: [:show, :edit]
   get 'users/confirm'
 end

@@ -11,7 +11,7 @@ class User < ApplicationRecord
   #Bookmarkのアソシエーション
   has_many :bookmarks, dependent: :destroy
   
-  #プロフィール画像を扱うための
+  #プロフィール画像を扱うための記述
   has_one_attached :profile_image
   
   def get_profile_image
@@ -19,7 +19,7 @@ class User < ApplicationRecord
       file_path = Rails.root.join('app/assets/images/sample-author1.jpg')
       profile_image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
-    profile_image.variant(resize_to_limit: [100, 100]).processed
+    profile_image.variant(resize_to_limit: [width, height0]).processed
   end
   
          

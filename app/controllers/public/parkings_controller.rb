@@ -12,6 +12,7 @@ class Public::ParkingsController < ApplicationController
   end
 
   def index
+    @parkings = Parking.all
   end
 
   def show

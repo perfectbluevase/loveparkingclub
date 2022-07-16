@@ -1,2 +1,14 @@
-<h1>Public::Parkings#index</h1>
-<p>Find me in app/views/public/parkings/index.html.erb</p>
+<h1><%= current_user %> さんの駐車場情報一覧</h1>
+
+<% @parkings.each do |parking| %>
+<div>
+  
+  <%= image_tag parking.get_image %>
+  <p>プロフィール画像：<%= image_tag 'sample-author1.jpg' %></p>
+  <p>駐車場名：<%= parking.parking_name %></p>
+  <p>住所：<%= parking.parking_address %></p>
+  <p>運営会社：<%= parking.parking_operator %></p>
+  <p>詳細：<%= parking.parking_fee_info %></p>
+  <p>駐車場についてのコメント：<%= parking.parking_review %></p>
+</div>
+<% end %>

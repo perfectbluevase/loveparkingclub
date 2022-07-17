@@ -15,12 +15,12 @@ class Public::UsersController < ApplicationController
   end
   
   def delete_user
-    @user = User.find_by(user_name: params[:user_name])
+    @user = User.find_by(user_id: params[:user_id])
   end
 
   def confirm
-    @user = User.find_by(user_name: params[:user_name])
-    @user.update(is_deleted: false)
+    @user = User.find_by(user_id: params[:user_id])
+    @user.update(is_deleted: true)
     reset_session
     redirect_to root_path
   end

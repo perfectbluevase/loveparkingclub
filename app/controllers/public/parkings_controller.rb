@@ -8,16 +8,18 @@ class Public::ParkingsController < ApplicationController
     @parking = Parking.new(parking_params)
     @parking.user_id = current_user.id
     @parking.save
+    @parking.create_tags
     redirect_to public_parkings_path
   end
-  
+
   def edit
     @parking = Parking.find(params[:id])
   end
-  
+
   def update
     @parking = Parking.find(params[:id])
     @parking.update(parking_params)
+    @parking.update_tags
     redirect_to public_parking_path
   end
 
@@ -39,7 +41,7 @@ class Public::ParkingsController < ApplicationController
   private
 
   def parking_params
-    params.require(:parking).permit(:parking_name, :image, :parking_address, :parking_operator, :parking_fee_info, :parking_review)
+    params.require(:parking).permit(:parking_name, :image, :parking_address, :parking_operator, :parking_fee_info, :parking_review, :input_tag)
   end
 
 

@@ -11,6 +11,8 @@
   <p>投稿ユーザー名：<%= @parking.user.user_name %></p>
   <p>ユーザー年齢：<%= @parking.user.age_type %></p>
   <p>ユーザーの住まい：<%= @parking.user.living_prefecture %></p>
+  <p>タグ：<%= link_to @parking.input_tag, root_path %></p>
+  
   <% if @parking.user == current_user %>
     <%= link_to "編集", edit_public_parking_path(@parking) %>
     <%= link_to "削除", public_parking_path(@parking), method: :delete, "data-confirm" => "本当に削除しますか？" %>

@@ -25,3 +25,7 @@
    <p><%= link_to "#{parking.post_comments.count} コメント", public_parking_path(parking.id) %></p>
 </div>
 <% end %>
+
+<div>
+<%= link_to "退会はこちら", public_unsubscribe_path(@user.id) %>
+</div>

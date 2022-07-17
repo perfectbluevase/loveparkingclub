@@ -6,7 +6,10 @@ namespace :public do
     resources :post_comments, only: [:create, :destroy] #コメントは投稿に紐づくのでネストさせる
   end
   resources :users, only: [:show, :edit, :update]
-  get 'users/confirm'
+  #退会確認画面用のルーティング
+  get '/users/:user_id/unsubscribe' => 'users#confirm', as: 'unsubscribe'
+  #論理削除用のルーティング
+  patch '/users/:user_id/withdrawal' => 'users#delete_user', as: 'withdrawal'
 end
 
 #ルーティングページの設定

@@ -13,8 +13,16 @@ class Public::UsersController < ApplicationController
     @user.update(user_params)
     redirect_to public_user_path
   end
+  
+  def delete_user
+    @user = User.find_by(user_name: params[:user_name])
+  end
 
   def confirm
+    @user = User.find_by(user_name: params[:user_name])
+    @user.update(is_deleted: false)
+    reset_session
+    redirect_to root_path
   end
   
   private

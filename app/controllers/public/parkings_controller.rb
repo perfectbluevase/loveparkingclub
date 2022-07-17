@@ -10,6 +10,16 @@ class Public::ParkingsController < ApplicationController
     @parking.save
     redirect_to public_parkings_path
   end
+  
+  def edit
+    @parking = Parking.find(params[:id])
+  end
+  
+  def update
+    @parking = Parking.find(params[:id])
+    @parking.update(parking_params)
+    redirect_to public_parking_path
+  end
 
   def index
     @parkings = Parking.all
@@ -17,6 +27,7 @@ class Public::ParkingsController < ApplicationController
 
   def show
     @parking = Parking.find(params[:id])
+    @post_comment = PostComment.new
   end
 
   def destroy

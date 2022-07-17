@@ -8,6 +8,11 @@ class Public::PostCommentsController < ApplicationController
     redirect_to  public_parking_path(parking)
   end
   
+  def destroy
+    PostComment.find(params[:id]).destroy
+    redirect_to public_parking_path(params[:parking_id])
+  end
+  
   private
   
   def post_comment_params

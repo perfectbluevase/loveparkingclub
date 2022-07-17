@@ -23,10 +23,13 @@
     <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
     <%= post_comment.user.user_name %>
     <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+    <% if post_comment.user == current_user %>
+      <%= link_to "削除", public_parking_post_comment_path(post_comment.parking, post_comment), method: :delete %>
+    <% end %>
   <% end %>
 </div>
 <div>
-  <%= form_with model: [@parking, @post_comment],url: public_parkings_path do |f| %>
+  <%= form_with model: [@parking, @post_comment],url: public_parking_post_comments_path(@parking.id) do |f| %>
     <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
     <%= f.submit "送信する" %>
   <% end %>

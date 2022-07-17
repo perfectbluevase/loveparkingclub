@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 namespace :public do
   #parkings, only: [:new, :create, :index, :show, :destory] onlyを指定するとdestroyが認識されない*要解決
   resources :parkings do
-    resources :post_comments, only: [:create] #コメントは投稿に紐づくのでネストさせる
+    resources :post_comments, only: [:create, :destroy] #コメントは投稿に紐づくのでネストさせる
   end
   resources :users, only: [:show, :edit, :update]
   get 'users/confirm'

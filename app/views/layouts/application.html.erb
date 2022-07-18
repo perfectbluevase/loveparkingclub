@@ -13,6 +13,12 @@
 
   <body>
     <header>
+        <li>
+          <%= link_to "トップページ", root_path %>
+        </li>
+        <li>
+          <%= link_to "about", about_path %>
+        </li>
       <% if user_signed_in? %>
         <li>
         <%= link_to '投稿フォーム', new_public_parking_path %>

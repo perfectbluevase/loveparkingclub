@@ -1,0 +1,31 @@
+<h1>ユーザー詳細</h1>
+
+
+<div>
+  <%= image_tag @user.get_profile_image(100,100) %>
+  <p>ユーザーネーム： <%= @user.user_name %></p>
+  <p>年齢： <%= @user.age_type %></p>
+  <p>住まい： <%= @user.living_prefecture %></p>
+  <p>自己紹介文： <%= @user.biography %></p>
+  <p><%= link_to "会員削除",admin_parking_path, method: :patch %></p>
+</div>
+
+<h3>投稿一覧</h3>
+<% @parkings.each do |parking| %>
+<div>
+  <p>駐車場名：
+  <%= link_to public_parking_path(parking.id) do %>
+    <%= parking.parking_name %>
+  <% end %>
+  </p>
+  <p>住所：<%= parking.parking_address %></p>
+  <p>運営会社：<%= parking.parking_operator %></p>
+  <p>詳細：<%= parking.parking_fee_info %></p>
+  <p>駐車場についてのコメント：<%= parking.parking_review %></p>
+   <p><%= link_to "#{parking.post_comments.count} コメント", public_parking_path(parking.id) %></p>
+</div>
+<% end %>
+
+<div>
+<%= link_to "退会はこちら", public_unsubscribe_path(@user.id) %>
+</div>

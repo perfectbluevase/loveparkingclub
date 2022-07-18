@@ -29,7 +29,11 @@
 <% end %>
 
 <h3>ブックマーク一覧</h3>
-
+<% @bookmarks.each do |bookmark| %>
+  <%= link_to public_parking_path(bookmark.parking.id) do %>
+    <%= bookmark.parking.parking_name %>
+  <% end %>
+<% end %>
 
 <div>
 <%= link_to "退会はこちら", public_unsubscribe_path(@user.id) %>

@@ -1,4 +1,5 @@
 class HomesController < ApplicationController
+  
   def top
     # hash_tagというURLパラメーターが存在していれば
     @parkings = if params[:oreno_hash_tag].present?

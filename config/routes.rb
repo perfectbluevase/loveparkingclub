@@ -1,16 +1,27 @@
 Rails.application.routes.draw do
 
+#ルーティングページの設定
+root to: 'homes#top'
+
+namespace :admin do
+  resources :user, only: [:index, :show, :destroy]
+  resources :parking, only: [:index, :show, :destroy]
+  get '/top' => 'homes#top'
+end
+
 namespace :public do
-  #only: [:new, :create, :index, :show, :destory] *onlyを指定するとdestroyが認識されない
+
+  #parkings, only: [:new, :create, :index, :show, :destory] onlyを指定するとdestroyが認識されない*要解決
   resources :parkings do
+    resources :post_comments, only: [:create, :destroy] #コメントは投稿に紐づくのでネストさせる
     resource :bookmarks, only: [:create, :destroy] #投稿にネストさせる
   end
   resources :users, only: [:show, :edit, :update]
-  get 'users/confirm'
+  #退会確認画面用のルーティング
+  get '/users/:user_id/unsubscribe' => 'users#confirm', as: 'unsubscribe'
+  #論理削除用のルーティング
+  patch '/users/:user_id/withdrawal' => 'users#delete_user', as: 'withdrawal'
 end
-
-#ルーティングページの設定
-root to: 'homes#top'
 
 get "/homes/about" => "homes#about", as: "about"
 

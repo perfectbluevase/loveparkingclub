@@ -1,0 +1,12 @@
+<h1>ユーザー一覧</h1>
+
+<% @users.each do |user| %>
+<div>
+  <p>ユーザーID：
+  <%= link_to admin_user_path(user.id) do %>
+    <%= user.id %>
+  <% end %>
+  </p>
+  <p>ユーザーネーム：<%= user.user_name %></p>
+</div>
+<% end %>

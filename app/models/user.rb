@@ -21,6 +21,11 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
+  
+  #退会済みのユーザーのログインを
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
 
 
 end

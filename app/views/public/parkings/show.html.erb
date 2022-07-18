@@ -7,10 +7,16 @@
   <p>運営会社：<%= @parking.parking_operator %></p>
   <p>詳細：<%= @parking.parking_fee_info %></p>
   <p>駐車場についてのコメント：<%= @parking.parking_review %></p>
+  <p>タグ：
+    <% @parking.tags.each do |hash_tag| %>
+      <%= link_to hash_tag.tag_name, public_parkings_path(oreno_hash_tag: hash_tag.tag_name) %>
+    <% end %>
+  </p>
   <p>プロフィール画像：<%= image_tag @parking.user.get_profile_image(100,100) %></p>
   <p>投稿ユーザー名：<%= @parking.user.user_name %></p>
   <p>ユーザー年齢：<%= @parking.user.age_type %></p>
   <p>ユーザーの住まい：<%= @parking.user.living_prefecture %></p>
+
   <% if @parking.user == current_user %>
     <%= link_to "編集", edit_public_parking_path(@parking) %>
     <%= link_to "削除", public_parking_path(@parking), method: :delete, "data-confirm" => "本当に削除しますか？" %>
@@ -21,5 +27,23 @@
       <td><%= link_to "☆", public_parking_bookmarks_path(@parking), method: :post %></td>
     <% end %>
     
+  <% end %>
+</div>
+
+<div>
+  <p>コメント件数：<%= @parking.post_comments.count %></p>
+  <% @parking.post_comments.each do |post_comment| %>
+    <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
+    <%= post_comment.user.user_name %>
+    <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+    <% if post_comment.user == current_user %>
+      <%= link_to "削除", public_parking_post_comment_path(post_comment.parking, post_comment), method: :delete %>
+    <% end %>
+  <% end %>
+</div>
+<div>
+  <%= form_with model: [@parking, @post_comment],url: public_parking_post_comments_path(@parking.id) do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
   <% end %>
 </div>

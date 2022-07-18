@@ -21,6 +21,20 @@ class Parking < ApplicationRecord
     end
     image
   end
+  
+  #既にブックマークをしているかどうかを検証
+  def bookmarked_by?(user)
+    bookmarks.where(user_id: user).exists?
+  end
+  
+  #Userのアソシエーション
+  belongs_to :user
+  #PostCommentのアソシエーション
+  has_many :post_comments, dependent: :destroy
+  #Bookmarkのアソシエーション
+  has_many :bookmarks, dependent: :destroy
+  #PostTagのアソシエーション
+  has_many :post_tags
 
   def input_tag
     # 一番基礎的な書き方

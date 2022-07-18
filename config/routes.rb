@@ -10,9 +10,11 @@ namespace :admin do
 end
 
 namespace :public do
+
   #parkings, only: [:new, :create, :index, :show, :destory] onlyを指定するとdestroyが認識されない*要解決
   resources :parkings do
     resources :post_comments, only: [:create, :destroy] #コメントは投稿に紐づくのでネストさせる
+    resource :bookmarks, only: [:create, :destroy] #投稿にネストさせる
   end
   resources :users, only: [:show, :edit, :update]
   #退会確認画面用のルーティング

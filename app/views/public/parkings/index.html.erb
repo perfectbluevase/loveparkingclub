@@ -1,5 +1,7 @@
 <h1><%= current_user %> さんの駐車場情報一覧</h1>
-
+<% if params[:oreno_hash_tag].present? %>
+  <%= params[:oreno_hash_tag] %>の検索結果
+<% end %>
 <% @parkings.each do |parking| %>
 <div>
   <p>駐車場名：

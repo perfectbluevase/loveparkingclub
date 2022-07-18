@@ -1,6 +1,24 @@
-<h1>トップページ</h1>
+
 <%= form_with url: public_parkings_path, method: :get do |f| %>
   <h4>タグ</h4>
   <%= f.text_field :oreno_hash_tag, autocomplete: true %>
   <%= f.submit '検索' %>
+<% end %>
+
+<% if params[:oreno_hash_tag].present? %>
+  <%= params[:oreno_hash_tag] %>の検索結果
+<% end %>
+<% @parkings.each do |parking| %>
+<div>
+  <p>駐車場名：
+  <%= link_to public_parking_path(parking.id) do %>
+    <%= parking.parking_name %>
+  <% end %>
+  </p>
+  <p>住所：<%= parking.parking_address %></p>
+  <p>運営会社：<%= parking.parking_operator %></p>
+  <p>詳細：<%= parking.parking_fee_info %></p>
+  <p>駐車場についてのコメント：<%= parking.parking_review %></p>
+  <p><%= link_to "#{parking.post_comments.count} コメント", public_parking_path(parking.id) %></p>
+</div>
 <% end %>

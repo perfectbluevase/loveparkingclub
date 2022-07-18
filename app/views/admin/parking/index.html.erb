@@ -1,2 +1,12 @@
-<h1>Admin::Parking#index</h1>
-<p>Find me in app/views/admin/parking/index.html.erb</p>
+<h1>全投稿一覧</h1>
+
+<% @parkings.each do |parking| %>
+<div>
+  <p>投稿ID：
+  <%= link_to public_parking_path(parking.id) do %>
+    <%= parking.id %>
+  <% end %>
+  </p>
+  <p>パーキング名：<%= parking.parking_name %></p>
+</div>
+<% end %>

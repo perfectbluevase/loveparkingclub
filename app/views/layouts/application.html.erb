@@ -14,38 +14,38 @@
   <body>
     <header>
         <li>
-          <%= link_to "トップページ", root_path %>
+          <%= link_to "Top", root_path %>
         </li>
         <li>
-          <%= link_to "about", about_path %>
+          <%= link_to "About", about_path %>
         </li>
       <% if user_signed_in? %>
         <li>
-        <%= link_to '投稿フォーム', new_public_parking_path %>
+        <%= link_to 'Post', new_public_parking_path %>
         </li>
         <li>
-        <%= link_to 'マイページ', public_user_path(current_user.id) %>
+        <%= link_to 'Members', public_user_path(current_user.id) %>
         </li>
         <li>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+          <%= link_to "Sign_out", destroy_user_session_path, method: :delete %>
         </li>
       <% else %>
         <li>
-          <%= link_to "新規登録", new_user_registration_path %>
+          <%= link_to "Sign_up", new_user_registration_path %>
         </li>
         <li>
-          <%= link_to "ログイン", new_user_session_path %>
+          <%= link_to "Sign_in", new_user_session_path %>
         </li>
       <% end %>
     </header>
     <footer>
        <% if admin_signed_in? %>
         <li>
-        <%= link_to "管理者ログアウト", destroy_admin_session_path, method: :delete %>
+        <%= link_to "Admin_sign_out", destroy_admin_session_path, method: :delete %>
         </li>
         <% else %>
         <li>
-        <%= link_to "管理者ログイン", admin_session_path %>
+        <%= link_to "For_admin", admin_session_path %>
         </li>
       <% end %>
     </footer>

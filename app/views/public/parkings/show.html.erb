@@ -26,8 +26,12 @@
   
 
   <% if @parking.user == current_user %>
-    <%= link_to "編集", edit_public_parking_path(@parking) %>
-    <%= link_to "削除", public_parking_path(@parking), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+    <%= link_to "投稿を編集", edit_public_parking_path(@parking) %>
+    <%= link_to "投稿を削除", public_parking_path(@parking), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+    <% else %>
+      <% if admin_signed_in?  %>
+      <%= link_to "投稿を削除", public_parking_path(@parking), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+    <% end %>
   <% end %>
 </div>
 

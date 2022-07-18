@@ -12,10 +12,18 @@
       <%= link_to hash_tag.tag_name, public_parkings_path(oreno_hash_tag: hash_tag.tag_name) %>
     <% end %>
   </p>
+  <div>
+  <% if @parking.bookmarked_by?(current_user) %>
+    <td><%= link_to "ブックマーク解除", public_parking_book_mark_path(@parking), method: :delete %></td>
+  <% else %>
+    <td><%= link_to "ブックマーク", public_parking_book_marks_path(@parking), method: :post %></td>
+  <% end %>
+  </div>
   <p>プロフィール画像：<%= image_tag @parking.user.get_profile_image(100,100) %></p>
   <p>投稿ユーザー名：<%= @parking.user.user_name %></p>
   <p>ユーザー年齢：<%= @parking.user.age_type %></p>
   <p>ユーザーの住まい：<%= @parking.user.living_prefecture %></p>
+  
 
   <% if @parking.user == current_user %>
     <%= link_to "編集", edit_public_parking_path(@parking) %>
@@ -34,6 +42,7 @@
     <% end %>
   <% end %>
 </div>
+
 <div>
   <%= form_with model: [@parking, @post_comment],url: public_parking_post_comments_path(@parking.id) do |f| %>
     <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>

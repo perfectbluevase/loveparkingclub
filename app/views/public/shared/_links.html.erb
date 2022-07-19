@@ -3,5 +3,5 @@
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Sign up", new_registration_path(resource_name) %><br />
+ <p>If you are not our member <br> <%= link_to "Sign_up", new_registration_path(resource_name) %> and join us!</p><br />
 <% end %>

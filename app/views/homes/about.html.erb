@@ -1,5 +1,27 @@
-<p>
-  LOVE PARKING CLUB<br>
-  SHERE THE  GOOD PARKING YOU FOUND<br>
-  THANK YOU
-</p>
+
+<div class="container text-center">
+  <div class="row">
+    <div class="col-3">
+    </div>
+    <div class="col-6 justify-content-center pb-4">
+      <%= image_tag 'moon3.jpg', size: '260x240' %>
+        <% if user_signed_in? %>
+            <p>Hi We are Love Parking Club.<br>
+                You can search A GOOD PARKING<br>
+                You are our member!<br>
+                So you can share A GOOD PARKING you found! <br>
+                HAVE A GOOD DRIVING LIFE!
+            </p>
+            <% else %>
+             <p>Hi We are Love Parking Club.<br>
+                You can search A GOOD PARKING<br>
+                And if you are <%= link_to "Member", new_user_session_path %> of us<br>
+                You can share A GOOD PARKING you found! <br>
+                HAVE A GOOD DRIVING LIFE!
+              </p>
+        <% end %>
+      </div>
+    <div class="col-3">
+    </div>
+  </div>
+</div>

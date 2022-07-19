@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
+  
   <head>
     <title>LPC</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -9,47 +10,75 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-
-  <body>
-    <header>
-        <li>
-          <%= link_to "Top", root_path %>
-        </li>
-        <li>
-          <%= link_to "About", about_path %>
-        </li>
-      <% if user_signed_in? %>
-        <li>
-        <%= link_to 'Post', new_public_parking_path %>
-        </li>
-        <li>
-        <%= link_to 'Members', public_user_path(current_user.id) %>
-        </li>
-        <li>
-          <%= link_to "Sign_out", destroy_user_session_path, method: :delete %>
-        </li>
-      <% else %>
-        <li>
-          <%= link_to "Sign_up", new_user_registration_path %>
-        </li>
-        <li>
-          <%= link_to "Sign_in", new_user_session_path %>
-        </li>
-      <% end %>
+  
+   <body class="d-flex flex-column vh-100">
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+          <a class="navbar-brand p-1" href="/"><%= image_tag('logosmall.png') %></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <%= link_to "Top", root_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "About", about_path, class: 'nav-link' %>
+            </li>
+            <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to 'Post', new_public_parking_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Members', public_user_path(current_user.id), class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Sign_out", destroy_user_session_path, method: :delete, class: 'nav-link' %>
+            </li>
+            <% else %>
+            <li class="nav-item">
+              <%= link_to "Sign_up", new_user_registration_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Sign_in", new_user_session_path, class: 'nav-link' %>
+            </li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
-    <footer>
-       <% if admin_signed_in? %>
-        <li>
-        <%= link_to "Admin_sign_out", destroy_admin_session_path, method: :delete %>
-        </li>
-        <% else %>
-        <li>
-        <%= link_to "For_admin", admin_session_path %>
-        </li>
-      <% end %>
+    
+    <main class="mb-auto">
+    <%= flash[:notice] %>
+    <%= yield %>
+    </main>
+    
+    <footer class="bg-warning text-black pt-2 pb-6">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <%= link_to image_tag("record-07.png", size: '70x50'), "https://open.spotify.com/playlist/5U91NfeqwVakW5gLK1JI2V?si=afd163417fad4869" %>
+          </div>
+          <div class="col-md-8">
+            <h6 class="text-black mt-2 mb-3">© All rights reserved by LoveParkingClub.</h6>
+            <ul class="p-0 list-unstyled">
+              <% if admin_signed_in? %>
+              <li>
+                <a href="" title="About" class="text-white-50"><%= link_to "Admin_sign_out", destroy_admin_session_path, method: :delete %></a>
+              </li>
+              <% else %>
+              <li>
+                <a href="" title="License informations" class="text-white-50"><%= link_to "For_admin", admin_session_path %></a>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
     </footer>
-  <%= flash[:notice] %>
-  <%= yield %>
   </body>
 </html>

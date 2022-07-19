@@ -1,0 +1,58 @@
+※コードの仮保存（フッター・ヘッダー）
+
+  <body>
+    <div class="container-fluid mx-0 sticky-top bg-white bg-gradiet bg-opacity-75 border-bottom d-flex align-items-center" style="height:100px;">
+      <table>
+        <tr>
+          <td>&nbsp;</td>
+          <td>
+            <%= link_to "Top", root_path %>
+          </td>
+          <td>&nbsp;</td>
+          <td>
+            <%= link_to "About", about_path %>
+          </td>
+        <% if user_signed_in? %>
+          <td>&nbsp;</td>
+          <td>
+            <%= link_to 'Post', new_public_parking_path %>
+          </td>
+          <td>&nbsp;</td>
+          <td>
+            <%= link_to 'Members', public_user_path(current_user.id) %>
+          </td>
+          <td>&nbsp;</td>
+          <td>
+            <%= link_to "Sign_out", destroy_user_session_path, method: :delete %>
+          </td>
+        <% else %>
+          <td>&nbsp;</td>
+          <td>
+            <%= link_to "Sign_up", new_user_registration_path %>
+          </td>
+          <td>&nbsp;</td>
+          <td>
+            <%= link_to "Sign_in", new_user_session_path %>
+          </td>
+        <% end %>
+      </tr>
+    </table>
+  </div>
+
+  <div class="fixed-bottom mx-0 bg-white bg-opacity-75 text-center" style="height:50px;">
+    <% if admin_signed_in? %>
+        <div>
+        <%= link_to "Admin_sign_out", destroy_admin_session_path, method: :delete %>
+        </div>
+        <% else %>
+        <div>
+        <%= link_to "For_admin", admin_session_path %>
+        </div>
+      <% end %>
+      <p>© All rights reserved by LoveParkingClub.</p>
+  </div>
+  
+  <%= flash[:notice] %>
+  <%= yield %>
+  </body>
+</html>

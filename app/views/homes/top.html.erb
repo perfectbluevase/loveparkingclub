@@ -1,10 +1,19 @@
 
+	
+  <div class="col-auto">
+    <%= image_tag 'logo_big.jpg', size: '640x240' %>
+  </div>
+
+
 <%= form_with url: public_parkings_path, method: :get do |f| %>
-  <h4>タグ</h4>
+  <h4>PUT ANY KEYWORD</h4>
   <%= f.text_field :oreno_hash_tag, autocomplete: true %>
   <%= f.submit '検索' %>
 <% end %>
 
+
+<%# 以下表示されない（仮置き）　%>
+<% if false %>
 <% if params[:oreno_hash_tag].present? %>
   <%= params[:oreno_hash_tag] %>の検索結果
 <% end %>
@@ -21,4 +30,5 @@
   <p>駐車場についてのコメント：<%= parking.parking_review %></p>
   <p><%= link_to "#{parking.post_comments.count} コメント", public_parking_path(parking.id) %></p>
 </div>
+<% end %>
 <% end %>

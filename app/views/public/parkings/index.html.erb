@@ -4,7 +4,8 @@
 <% @parkings.each do |parking| %>
 <div>
   <p>駐車場名：
-  <%= link_to public_parking_path(parking.id) do %>
+  <!--, data: {"turbolinks" => false} → link_toのturbolinksをオフにしてリロードが行われGマップが表示される-->
+  <%= link_to public_parking_path(parking.id), data: {"turbolinks" => false} do %>
     <%= parking.parking_name %>
   <% end %>
   </p>

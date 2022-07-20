@@ -56,3 +56,147 @@
   <%= yield %>
   </body>
 </html>
+
+
+
+
+
+"showの仮保存"
+<div class= "container" >
+
+<div class= "row">
+  
+<div class= "col-6">
+  <%= image_tag @parking.get_image, :size => '500x500' %>
+</div>
+
+<div class= "col-6">
+  <h2>gmap</h2>
+
+<!-- ここから追加 -->
+<input id="address" type="textbox" value="<%= @parking.parking_address %>">
+<input type="button" value="Encode" onclick="codeAddress()">
+<!-- ここまで追加-->
+
+<div id='map'></div>
+
+<style>
+#map {
+  height: 300px;
+  width: 300px;
+}
+</style>
+
+<script>
+let map
+function initMap(){
+  geocoder = new google.maps.Geocoder()
+
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 40.7828, lng:-73.9653},
+    zoom: 12,
+  });
+
+  marker = new google.maps.Marker({
+    position:  {lat: 40.7828, lng:-73.9653},
+    map: map
+  });
+}
+// ここから追加 
+let geocoder
+
+function codeAddress(){
+  let inputAddress = document.getElementById('address').value;
+
+  geocoder.geocode( { 'address': "<%= @parking.parking_address %>"}, function(results, status) {
+    if (status == 'OK') {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+      });
+    } else {
+      alert('該当する結果がありませんでした：' + status);
+    }
+  });   
+}
+// ここまで追加 
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6Zb50uhc-JY0geObpW8AaFljB5vi8scQ&callback=initMap" async defer></script>
+
+
+
+
+
+
+
+
+<div>
+  
+  <p>投稿日：<%= @parking.created_at.strftime('%Y/%m/%d') %></p>
+  <p>駐車場名：<%= @parking.parking_name %></p>
+  <p>住所：<%= @parking.parking_address %></p>
+  <p>運営会社：<%= @parking.parking_operator %></p>
+  <p>詳細：<%= @parking.parking_fee_info %></p>
+  <p>駐車場についてのコメント：<%= @parking.parking_review %></p>
+  <p>タグ：
+    <% @parking.tags.each do |hash_tag| %>
+      <%= link_to hash_tag.tag_name, public_parkings_path(oreno_hash_tag: hash_tag.tag_name) %>
+    <% end %>
+  </p>
+  <div>
+  <% if @parking.bookmarked_by?(current_user) %>
+    <td><%= link_to "ブックマーク解除", public_parking_book_mark_path(@parking), method: :delete %></td>
+  <% else %>
+    <td><%= link_to "ブックマーク", public_parking_book_marks_path(@parking), method: :post %></td>
+  <% end %>
+  </div>
+  <p>プロフィール画像：<%= image_tag @parking.user.get_profile_image(50,50) %></p>
+  <p>投稿ユーザー名：<%= @parking.user.user_name %></p>
+  <p>ユーザー年齢：<%= @parking.user.age_type %></p>
+  <p>ユーザーの住まい：<%= @parking.user.living_prefecture %></p>
+
+
+  <% if @parking.user == current_user %>
+    <%= link_to "投稿を編集", edit_public_parking_path(@parking) %>
+    <%= link_to "投稿を削除", public_parking_path(@parking), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+    <% else %>
+      <% if admin_signed_in?  %>
+      <%= link_to "投稿を削除", public_parking_path(@parking), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+    <% end %>
+  <% end %>
+</div>
+
+<div>
+  <p>コメント件数：<%= @parking.post_comments.count %></p>
+  <% @parking.post_comments.each do |post_comment| %>
+    <p><%= image_tag post_comment.user.get_profile_image(50,50) %></p>
+    <%= post_comment.user.user_name %>
+    <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+    <% if post_comment.user == current_user %>
+      <%= link_to "削除", public_parking_post_comment_path(post_comment.parking, post_comment), method: :delete %>
+    <% end %>
+  <% end %>
+</div>
+
+<div>
+  <%= form_with model: [@parking, @post_comment],url: public_parking_post_comments_path(@parking.id) do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>
+  
+</div>
+  
+
+  
+
+
+
+ 
+</div>
+
+
+
+</div>
+

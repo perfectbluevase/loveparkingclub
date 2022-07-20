@@ -30,10 +30,10 @@
             </li>
             <% if user_signed_in? %>
             <li class="nav-item">
-              <%= link_to 'Post', new_public_parking_path, class: 'nav-link' %>
+              <%= link_to 'NewPost', new_public_parking_path, class: 'nav-link' %>
             </li>
             <li class="nav-item">
-              <%= link_to 'Members', public_user_path(current_user.id), class: 'nav-link' %>
+              <%= link_to "Member's", public_user_path(current_user.id), class: 'nav-link' %>
             </li>
             <li class="nav-item">
               <%= link_to "Sign_out", destroy_user_session_path, method: :delete, class: 'nav-link' %>
@@ -49,16 +49,17 @@
       </nav>
     </header>
 
-    <main class="mb-auto" style= "margin-top:200px; margin-bottom:200px;">
+    <main class="mb-auto" style= "margin-top:250px;">
     <%= flash[:notice] %>
     <%= yield %>
     </main>
 
-    <footer class="bg-warning text-black pt-2 pb-6">
+    <footer class="bg-warning text-black pt-4 pb-6">
       <div class="container">
         <div class="row no-gutters">
           <div class="col-md-4">
-            <%= link_to image_tag("record-07.png", size: '70x50'), "https://open.spotify.com/playlist/5U91NfeqwVakW5gLK1JI2V?si=afd163417fad4869" %>
+            <!--別タブで開く。rel: "noopener noreferrer"→参照元のリンク情報を渡さないようにし、セキュリティを強化する-->
+            <%= link_to image_tag("record-07.png", size: '70x50'), "https://open.spotify.com/playlist/5U91NfeqwVakW5gLK1JI2V?si=afd163417fad4869", target: :_blank, rel: "noopener noreferrer" %>
           </div>
           <div class="col-md-8">
             <h6 class="text-black mt-2 mb-3">© All rights reserved by LoveParkingClub.</h6>

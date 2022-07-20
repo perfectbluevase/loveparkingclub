@@ -1,20 +1,39 @@
 
-<h1>新規駐車場情報登録</h1>
-<%= form_with model: @parking, url: public_parkings_path do |f| %>
-  <h4>駐車場の写真</h4>
-    <%= f.file_field :image, accept: "image/*" %>
-  <h4>駐車場名</h4>
-    <%= f.text_field :parking_name %>
-  <h4>住所</h4>
-    <%= f.text_area :parking_address %>
-  <h4>運営会社</h4>
-    <%= f.text_field :parking_operator %>
-  <h4>詳細</h4>
-    <h6>料金詳細や利用可能台数など</h6>
-      <%= f.text_area :parking_fee_info %>
-  <h4>駐車場についてのコメント</h4>
-    <%= f.text_area :parking_review %>
-  <h4>タグ</h4>
-    <%= f.text_area :input_tag %>
-  <%= f.submit '投稿' %>
-<% end %>
+<div class="container text-center">
+  <div class="row p-5">
+
+    <div class="col-1">
+    </div>
+
+    <div class= "col-10 p-1 text-center border border-info">
+      <div class= "p-3" ><h1>NewPost</h1></div>
+      <%= form_with model: @parking, url: public_parkings_path do |f| %>
+        <div class="text-center p-2"><%= f.file_field :image, accept: "image/*" %></div>
+        <div class="text-center p-2"><%= f.text_field :parking_operator, placeholder: '運営会社', size: "55x20" %></div>
+        <div class="text-center p-2"><%= f.text_field :parking_name, placeholder: '駐車場名', size: "55x20" %></div>
+        <div class="text-center p-2">
+          <%= f.text_area :parking_address, placeholder: '住所', size: "54x5" %><br>
+          <a>*郵便番号から番地までの記載をお願い致します。</a>
+        </div>
+        <div class="text-center p-2"><%= f.text_area :parking_fee_info, placeholder: 'サービス詳細', size: "54x5" %><br>
+          <a>*料金/駐車可能台数などの記載をお願い致します。</a>
+        </div>
+        <div class="text-center p-2"><%= f.text_area :parking_review, placeholder: 'コメント', size: "54x5" %></div>
+        <div class="text-center p-2"><%= f.text_field :input_tag, placeholder: 'タグをカンマで区切って入力してください。 例)駅近,太陽の塔', size: "55x20" %><br>
+          <a>*主に駐車場利用の目的・地域の関連タグをつけてください。</a>
+        </div>
+        <div class="text-center p-2"><%= f.submit 'POST', class: 'btn border-dark rounded-0' %></div>
+      <% end %>
+    </div>
+
+
+    <div class="col-1">
+    </div>
+
+  </div>
+</div>
+
+
+
+
+

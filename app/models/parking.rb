@@ -59,7 +59,7 @@ class Parking < ApplicationRecord
     end
   end
 
-  # @input_tagを使ってpost_tagのリレーション関係を再生性する処理
+  # @input_tagを使ってpost_tagのリレーション関係を再生成する処理
   def update_tags
     post_tags.destroy_all
     create_tags

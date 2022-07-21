@@ -30,7 +30,7 @@ class Public::ParkingsController < ApplicationController
       if tag.present?
         tag.parkings
       else
-        flash.now[:notice] = "該当のタグはありません。"
+        flash.now[:notice] = "Sorry! There is no post having this tag."
         Parking.none
       end
     else

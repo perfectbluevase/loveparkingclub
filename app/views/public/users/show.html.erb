@@ -1,6 +1,6 @@
-<div class="container">
-  <p>Hello! <%= current_user.user_name %> </p>
+<div class="container pt-4">
   <div class="row">
+    
     <div class="card col-md-3 col-sm-1 border border-success" style="width: 18rem; height: 400px;">
       <div class="card-body">
         <p class="card-text">
@@ -23,6 +23,7 @@
           <tr>
             <th scope="col">駐車場名</th>
             <th scope="col">住所</th>
+            <th scope="col">タグ</th>
             <th scope="col">コメント</th>
           </tr>
         </thead>
@@ -35,6 +36,11 @@
               <%= parking.parking_name %>
               <% end %></th>
             <td><%= parking.parking_address %></td>
+            <td>
+              <% parking.tags.each do |hash_tag| %>
+                <%= link_to hash_tag.tag_name, public_parkings_path(oreno_hash_tag: hash_tag.tag_name) %>
+              <% end %>
+            </td>
             <!--, data: {"turbolinks" => false} → link_toのturbolinksをオフにしてリロードが行われGマップが表示される-->
             <td><%= link_to "#{parking.post_comments.count} コメント", public_parking_path(parking.id), data: {"turbolinks" => false} %></td>
           </tr>

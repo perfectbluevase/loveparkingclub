@@ -1,57 +1,66 @@
 <!DOCTYPE html>
 <html lang="ja">
 
-  <head>
-    <title>LPC</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>LPC</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-   <body class="d-flex flex-column vh-100">
-    <header class="shadow-sm">
-      <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container">
-          <a class="navbar-brand p-1" href="/"><%= image_tag('logosmall.png') %></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+<body class="d-flex flex-column vh-100">
+     
+  <header class="shadow-sm">
+      
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+      <div class="container">
+          
+        <!--左画像-->
+        <a class="navbar-brand p-1" href="/"><%= image_tag('logosmall.png') %></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+          
+          <!--右メニュー-->
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <%= link_to "Top", root_path, class: 'nav-link' %>
+              <u><%= link_to "Top", root_path, class: 'nav-link text-primary' %></u>
             </li>
             <li class="nav-item">
-              <%= link_to "About", about_path, class: 'nav-link' %>
+              <u> <%= link_to "About", about_path, class: 'nav-link text-primary' %></u>
             </li>
             <% if user_signed_in? %>
             <li class="nav-item">
-              <%= link_to 'NewPost', new_public_parking_path, class: 'nav-link' %>
+              <u><%= link_to 'NewPost', new_public_parking_path, class: 'nav-link text-primary' %></u>
             </li>
             <li class="nav-item">
-              <%= link_to "Member's", public_user_path(current_user.id), class: 'nav-link' %>
+              <u><%= link_to "Member's", public_user_path(current_user.id), class: 'nav-link text-primary' %></u>
             </li>
             <li class="nav-item">
-              <%= link_to "Sign_out", destroy_user_session_path, method: :delete, class: 'nav-link' %>
+             <u> <%= link_to "Sign_out", destroy_user_session_path, method: :delete, class: 'nav-link text-primary' %></u>
             </li>
             <% else %>
             <li class="nav-item">
-              <%= link_to "Sign_in", new_user_session_path, class: 'nav-link' %>
+              <u><%= link_to "Sign_in", new_user_session_path, class: 'nav-link text-primary' %></u>
             </li>
             <% end %>
             </ul>
           </div>
+          
         </div>
       </nav>
     </header>
 
-    <main class="mb-auto" style= "margin-top:250px;">
-    <%= flash[:notice] %>
-    <%= yield %>
+    <main class="mb-auto" style= "margin-top:150px;">
+      <div class= "container pt-4">
+         <%= flash[:notice] %>
+         <%= yield %>
+      </div>
     </main>
 
     <footer class="bg-warning text-black pt-4 pb-6">

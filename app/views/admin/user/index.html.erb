@@ -1,12 +1,28 @@
-<h1>ユーザー一覧</h1>
+<div class= "container">
+  
+  <h1>メンバーズ一覧</h1>
+  
+  <table class="table">
+    
+    <thead>
+      <tr>
+        <th>ユーザーID</th>
+        <th>ユーザーネーム</th>
+      </tr>
+    </thead>
+    
+    <% @users.each do |user| %>
+    <tbody>
+      <tr>
+          <td>
+            <%= link_to admin_user_path(user.id) do %>
+            <%= user.id %>
+            <% end %>
+          </td>
+          <td><%= user.user_name %></td>
+      </tr>
+    </tbody>
+    <% end %>
+  </table>
 
-<% @users.each do |user| %>
-<div>
-  <p>ユーザーID：
-  <%= link_to admin_user_path(user.id) do %>
-    <%= user.id %>
-  <% end %>
-  </p>
-  <p>ユーザーネーム：<%= user.user_name %></p>
 </div>
-<% end %>

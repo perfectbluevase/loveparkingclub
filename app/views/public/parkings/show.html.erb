@@ -1,4 +1,10 @@
 <div class= "container p-5" >
+  
+  <% if admin_signed_in?  %>
+      <h1>
+      <%= link_to "投稿を削除", public_parking_path(@parking), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+      </h1>
+  <% end %>
 
   <div class= "row">
 
@@ -24,16 +30,14 @@
   </div>
 
   <div style= "padding-top: 20px">
-    <div><%= image_tag @parking.user.get_profile_image(50,50) %> <%= @parking.updated_at.strftime('%Y/%m/%d') %> : <%= @parking.user.user_name %> / <%= @parking.user.age_type %> 歳 / <%= @parking.user.living_prefecture %></div>
+    <div><%= image_tag @parking.user.get_profile_image(50,50) %> <%= @parking.updated_at.strftime('%Y/%m/%d') %> :
+      <%= link_to @parking.user.user_name, public_user_path(@parking.user.id) %> /
+    <%= @parking.user.age_type %> 歳 / <%= @parking.user.living_prefecture %></div>
   </div>
 
   <% if @parking.user == current_user %>
     <%= link_to "Edit", edit_public_parking_path(@parking) %> |
     <%= link_to "Delete", public_parking_path(@parking), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-    <% else %>
-      <% if admin_signed_in?  %>
-      <%= link_to "Delete", public_parking_path(@parking), method: :delete, "data-confirm" => "本当に削除しますか？" %>
-    <% end %>
   <% end %>
 
 

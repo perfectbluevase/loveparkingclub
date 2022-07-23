@@ -38,3 +38,6 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# .envに記載したデータベースの情報がgitで管理されなくなり、pushから
+/.env

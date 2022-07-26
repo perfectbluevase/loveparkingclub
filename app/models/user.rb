@@ -29,6 +29,11 @@ class User < ApplicationRecord
   def active_for_authentication?
     super && (is_deleted == false)
   end
-
+  
+  # def update_status_destroy
+    # if update(is_deleted: true)
+      # parkings.destroy_all
+    # end
+  # end
 
 end

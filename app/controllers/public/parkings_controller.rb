@@ -7,9 +7,12 @@ class Public::ParkingsController < ApplicationController
   def create
     @parking = Parking.new(parking_params)
     @parking.user_id = current_user.id
-    @parking.save
+    if @parking.save
     @parking.create_tags
     redirect_to public_parking_path(@parking.id)
+    else
+    render :new
+    end
   end
 
   def edit
@@ -18,9 +21,13 @@ class Public::ParkingsController < ApplicationController
 
   def update
     @parking = Parking.find(params[:id])
-    @parking.update(parking_params)
-    @parking.update_tags
+    if @parking.update(parking_params)
+     @parking.update_tags
     redirect_to public_parking_path
+    else
+    render :edit
+    end
+   
   end
 
   def index

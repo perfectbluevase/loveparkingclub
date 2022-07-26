@@ -12,6 +12,11 @@ class Parking < ApplicationRecord
 
   #ActiveStrageへの紐付け
   has_one_attached :image
+  
+  #駐車場名と住所は１文字以上存在
+  validates :parking_name, presence: true
+  validates :parking_address, presence: true
+  
 
   #デフォルト画像の設定
   def get_image

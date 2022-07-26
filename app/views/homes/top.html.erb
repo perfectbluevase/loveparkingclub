@@ -7,7 +7,7 @@
     <div class="col-10 justify-content-center pb-4">
         <%= image_tag 'logo_big.jpg', size: '800x422', hspace: '10', vspace:'10' %>
       <%= form_with url: public_parkings_path, method: :get do |f| %>
-        <%= f.text_field :oreno_hash_tag, placeholder: "Put 0NE key-word like 品川駅 太陽の塔 駅近 etc...", size: "55x22" %>
+        <%= f.text_field :oreno_hash_tag, placeholder: "Put ONE key-word like 品川駅 太陽の塔 駅近 etc...", size: "55x22" %>
         <%= f.submit 'GO', class: 'rounded-0' %>
       <% end %>
     </div>

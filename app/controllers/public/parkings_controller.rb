@@ -26,7 +26,7 @@ class Public::ParkingsController < ApplicationController
   def index
     # hash_tagというURLパラメーターが存在していれば
     @parkings = if params[:oreno_hash_tag].present?
-      tag = Tag.find_by(tag_name: params[:oreno_hash_tag])
+      tag = Tag.find_by(name: params[:oreno_hash_tag])
       if tag.present?
         tag.parkings
       else
@@ -46,7 +46,7 @@ class Public::ParkingsController < ApplicationController
   def destroy
     @parking = Parking.find(params[:id])
     @parking.destroy
-    redirect_to public_parking_path
+    redirect_to root_path
   end
 
   private

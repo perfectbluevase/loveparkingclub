@@ -29,7 +29,7 @@
           <td><%= parking.parking_fee_info %></td>
           <td>
             <% parking.tags.each do |hash_tag| %>
-              <%= link_to hash_tag.tag_name, public_parkings_path(oreno_hash_tag: hash_tag.tag_name) %>
+              <%= link_to hash_tag.name, public_parkings_path(oreno_hash_tag: hash_tag.name) %>
             <% end %>
           </td>
         </tr>

@@ -42,7 +42,7 @@ class Parking < ApplicationRecord
     #tag_names.join(",")
 
     # 一番キレイな書き方
-    tags.map(&:tag_name).join(",")
+    tags.map(&:name).join(",")
   end
 
   def input_tag=(value)
@@ -54,7 +54,7 @@ class Parking < ApplicationRecord
     # "aaa,bbb" => ["aaa", "bbb"]
     input_tags = @input_tag.split(",")
     input_tags.each do |i_tag|
-      tag = Tag.find_or_create_by(tag_name: i_tag)
+      tag = Tag.find_or_create_by(name: i_tag)
       post_tags.find_or_create_by(tag_id: tag.id)
     end
   end

@@ -2,7 +2,7 @@
   
   <% if admin_signed_in?  %>
       <h1>
-      <%= link_to "投稿を削除", public_parking_path(@parking), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+      <%= link_to "投稿を削除", root_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
       </h1>
   <% end %>
 
@@ -21,7 +21,7 @@
         <p>コメント：<br><%= @parking.parking_review %></p>
         <p>タグ：
             <% @parking.tags.each do |hash_tag| %>
-              <%= link_to hash_tag.tag_name, public_parkings_path(oreno_hash_tag: hash_tag.tag_name) %>
+              <%= link_to hash_tag.name, public_parkings_path(oreno_hash_tag: hash_tag.name) %>
             <% end %>
         </p>
       </div>

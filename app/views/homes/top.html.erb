@@ -1,23 +1,23 @@
 <div class="container text-center">
   <div class="row align-items-center">
-    
+
     <div class="col-1">
     </div>
-    
+
     <div class="col-10 justify-content-center pb-4">
-        <%= image_tag 'logo_big.jpg', size: '720x380', hspace: '10', vspace:'10' %>
+        <%= image_tag 'logo_big.jpg', size: '800x422', hspace: '10', vspace:'10' %>
       <%= form_with url: public_parkings_path, method: :get do |f| %>
-        <%= f.text_field :oreno_hash_tag, placeholder: "Put 0NE key-word like 品川駅 太陽の塔 駅近 etc...", size: "55x22" %> 
-        <%= f.submit 'GO', class: 'btn border-dark rounded-0' %>
+        <%= f.text_field :oreno_hash_tag, placeholder: "Put 0NE key-word like 品川駅 太陽の塔 駅近 etc...", size: "55x22" %>
+        <%= f.submit 'GO', class: 'rounded-0' %>
       <% end %>
     </div>
-    
+
     <div class="col-1">
     </div>
-    
+
   </div>
 </div>
-	
+
 
 <%# 以下表示されない（仮置き）　%>
 <% if false %>

@@ -4,7 +4,7 @@
     </div>
     <div class="col-6 justify-content-center pb-4">
       <h2>退会しますか？</h2>
-        <%= link_to "退会する",public_withdrawal_path, method: :patch %>
+        <%= link_to "退会する",public_user_path(current_user), method: :delete %>
         <%= link_to "退会しない", public_user_path(current_user) %>
     </div>
     <div class="col-3">

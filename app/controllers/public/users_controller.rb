@@ -23,8 +23,10 @@ class Public::UsersController < ApplicationController
   end
   
   def delete_user
-    @user = User.find_by(params[:id])
-    @user.update(is_deleted: true)
+    #@user = User.find_by(params[:id])
+    @user = User.find(params[:id])
+    #@user.update(is_deleted: true)
+    @user.destroy
     reset_session
     flash[:notice] = "ありがとうございました！"
     redirect_to root_path

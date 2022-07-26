@@ -5,7 +5,7 @@ def after_sign_in_path_for(resource)
   when Admin
     admin_top_path
   when User
-    edit_public_user_path(current_user.id)
+    public_user_path(current_user.id)
     #public_user_path(current_user.id)
   end
 end

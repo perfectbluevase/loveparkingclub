@@ -12,16 +12,21 @@ class Parking < ApplicationRecord
 
   #ActiveStrageへの紐付け
   has_one_attached :image
+  
+  #駐車場名と住所は１文字以上存在
+  validates :parking_name, presence: true
+  validates :parking_address, presence: true
+  
 
   #デフォルト画像の設定
   def get_image
     unless image.attached?
-      file_path = Rails.root.join('app/assets/images/no_image.jpeg')
+      file_path = Rails.root.join('app/assets/images/sample_parking.png')
       image.attach(io: File.open(file_path), filename: 'default-image.jpg', content_type: 'image/jpeg')
     end
     image
   end
-  
+
   #既にブックマークをしているかどうかを検証
   def bookmarked_by?(user)
     bookmarks.where(user_id: user).exists?

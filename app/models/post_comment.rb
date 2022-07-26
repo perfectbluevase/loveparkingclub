@@ -5,4 +5,6 @@ class PostComment < ApplicationRecord
   #Parkingのアソシエーション
   belongs_to :parking
   
+  validates :comment, presence: true
+  
 end

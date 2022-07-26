@@ -8,6 +8,7 @@
       <tr>
         <th>ユーザーID</th>
         <th>ユーザーネーム</th>
+        <th>会員ステータス</th>
       </tr>
     </thead>
     
@@ -20,6 +21,13 @@
             <% end %>
           </td>
           <td><%= user.user_name %></td>
+          <td>
+            <% if user.is_deleted? == false %>
+            <a>アカウント有効</a>
+            <% else %>
+            <a>退会済</a>
+            <% end %>
+          </td>
       </tr>
     </tbody>
     <% end %>

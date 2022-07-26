@@ -16,6 +16,17 @@ class Admin::UserController < ApplicationController
     redirect_to admin_user_index_path
   end
   
+  def delete_user
+    #@user = User.find_by(params[:id])
+    @user = User.find(params[:user_id])
+    @user.update(is_deleted: true)
+    # @user.update_status_destroy
+    # @user.destroy
+    reset_session
+    flash[:notice] = "会員ステータスを退会済みにしました"
+    redirect_to admin_user_index_path
+  end
+  
   private
   
   def user_params

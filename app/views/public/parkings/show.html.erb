@@ -1,6 +1,6 @@
 <div class= "container p-5" >
-  
-  <% if admin_signed_in?  %>
+
+  <% if admin_signed_in? %>
       <h1>
       <%= link_to "投稿を削除", root_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
       </h1>
@@ -31,8 +31,23 @@
 
   <div style= "padding-top: 20px">
     <div><%= image_tag @parking.user.get_profile_image(50,50) %> <%= @parking.updated_at.strftime('%Y/%m/%d') %> :
-      <%= link_to @parking.user.user_name, public_user_path(@parking.user.id) %> /
-    <%= @parking.user.age_type %> 歳 / <%= @parking.user.living_prefecture %></div>
+      <% if user_signed_in?  %>
+        <%= link_to @parking.user.user_name, public_user_path(@parking.user.id) %>
+      <% else %>
+        <%= @parking.user.user_name %>
+      <% end %> /
+
+      <% if @parking.user.age_type.present? %>
+        <%= @parking.user.age_type %> 歳
+      <% else %>
+        <div>年齢非公開</div>
+      <% end %> /
+
+      <% if @parking.user.living_prefecture.present? %>
+       <%= @parking.user.living_prefecture %>
+      <% else %>
+        <div>居住地非公開</div>
+      <% end %>
   </div>
 
   <% if @parking.user == current_user %>
@@ -43,13 +58,16 @@
 
 
   <div style= "padding-top: 20px">
-  <% if @parking.bookmarked_by?(current_user) %>
-    <td><%= link_to image_tag("kiss-12.png", size: '60x40'), public_parking_book_mark_path(@parking), method: :delete %></td>
-    <!--<td><%= link_to "(´ε｀ )♥", public_parking_book_mark_path(@parking), method: :delete %></td>-->
-  <% else %>
-    <td><%= link_to image_tag("kiss-13.png", size: '60x40'), public_parking_book_marks_path(@parking), method: :post %></td>
-    <!--<td><%= link_to "YOU LIKE IT?", public_parking_book_marks_path(@parking), method: :post %></td>-->
-  <% end %>
+    <% if user_signed_in?  %>
+      <% if @parking.bookmarked_by?(current_user) %>
+        <td><%= link_to image_tag("kiss-12.png", size: '60x40'), public_parking_book_mark_path(@parking), method: :delete %></td>
+        <!--<td><%= link_to "(´ε｀ )♥", public_parking_book_mark_path(@parking), method: :delete %></td>-->
+      <% else %>
+        <td><%= link_to image_tag("kiss-13.png", size: '60x40'), public_parking_book_marks_path(@parking), method: :post %></td>
+        <!--<td><%= link_to "YOU LIKE IT?", public_parking_book_marks_path(@parking), method: :post %></td>-->
+      <% end %>
+    <% else %>
+    <% end %>
   </div>
 
 
@@ -137,7 +155,13 @@
     <% @parking.post_comments.each do |post_comment| %>
      <div style= "padding: 15px">
      <div style= "border-bottom: dotted">
-       <%= image_tag post_comment.user.get_profile_image(30,30) %> <%= post_comment.created_at.strftime('%Y/%m/%d') %> <%= post_comment.user.user_name %>
+       <%= image_tag post_comment.user.get_profile_image(30,30) %>
+         <% if user_signed_in?  %>
+          <%= link_to post_comment.user.user_name, public_user_path(post_comment.user.id) %>
+        <% else %>
+           <%= post_comment.user.user_name %>
+        <% end %>
+       <%= post_comment.created_at.strftime('%Y/%m/%d') %>
        <% if post_comment.user == current_user %>
         <%= link_to "×", public_parking_post_comment_path(post_comment.parking, post_comment), method: :delete %>
       <% end %>
@@ -148,12 +172,16 @@
     <% end %>
 
      <% if user_signed_in?  %>
-    <div style= "padding: 15px">
-    <%= form_with model: [@parking, @post_comment],url: public_parking_post_comments_path(@parking.id) do |f| %>
-      <%= f.text_area :comment, rows: '', placeholder: "Say hi to others" %> <%= f.submit "送信する" %>
-    <% end %>
-    <% end %>
-  </div>
+      <div style= "padding: 15px">
+        <% if @post_comment.errors.any? %>
+         <div>コメントを入力してください！</div>
+        <% end %>
+        <%= form_with model: [@parking, @post_comment],url: public_parking_post_comments_path(@parking.id) do |f| %>
+          <div class= "col"><%= f.text_area :comment, rows: '', placeholder: "Say HI to others", size: "45x2" %></div>
+          <div class= "col"><%= f.submit "TALK!", class: 'rounded-0' %></div>
+        <% end %>
+      <% end %>
+      </div>
 
 
   </div>

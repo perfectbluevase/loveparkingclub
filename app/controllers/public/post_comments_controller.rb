@@ -4,8 +4,11 @@ class Public::PostCommentsController < ApplicationController
     parking = Parking.find(params[:parking_id])
     comment = current_user.post_comments.new(post_comment_params)
     comment.parking_id = parking.id
-    comment.save
-    redirect_to  public_parking_path(parking)
+    if comment.save
+      redirect_to  public_parking_path(parking)
+    else
+      redirect_to  public_parking_path(parking)
+    end
   end
   
   def destroy

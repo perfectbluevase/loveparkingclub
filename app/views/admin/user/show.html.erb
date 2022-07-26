@@ -1,7 +1,15 @@
 <div class= "container p-5">
 
   <h3>ID:<%= @user.id %>の詳細</h3>
-  <h1><%= link_to "会員削除",admin_parking_path, method: :patch %></h1>
+  <% if @user.is_deleted? == false %>
+  <h1><%= link_to "会員削除",admin_withdrawal_path(@user.id), method: :patch %></h1>
+  <% else %>
+  <h1>このユーザーは退会済みです</h1>
+  <% end %>
+  
+  
+
+  
 
   <div class= "row">
     <div class= "col-6 text-center">

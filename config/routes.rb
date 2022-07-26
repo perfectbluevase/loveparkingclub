@@ -7,6 +7,7 @@ namespace :admin do
   resources :user, only: [:index, :show, :destroy]
   resources :parking, only: [:index, :show, :destroy]
   get '/top' => 'homes#top'
+  patch '/users/:user_id/withdrawal' => 'user#delete_user', as: 'withdrawal'
 end
 
 namespace :public do

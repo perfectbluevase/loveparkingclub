@@ -9,7 +9,7 @@ class Public::ParkingsController < ApplicationController
     @parking.user_id = current_user.id
     @parking.save
     @parking.create_tags
-    redirect_to public_parkings_path
+    redirect_to public_parking_path(@parking.id)
   end
 
   def edit
@@ -34,7 +34,8 @@ class Public::ParkingsController < ApplicationController
         Parking.none
       end
     else
-      Parking.all
+      # Parking.all
+      redirect_to root_path
     end
   end
 

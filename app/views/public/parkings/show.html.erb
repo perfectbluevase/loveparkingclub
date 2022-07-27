@@ -2,7 +2,7 @@
 
   <% if admin_signed_in? %>
       <h1>
-      <%= link_to "投稿を削除", root_path, method: :delete, "data-confirm" => "本当に削除しますか？" %>
+      <%= link_to "投稿を削除", admin_parking_path(@parking.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
       </h1>
   <% end %>
 
@@ -30,7 +30,7 @@
   </div>
 
   <div style= "padding-top: 20px">
-    <div><%= image_tag @parking.user.get_profile_image(50,50) %> <%= @parking.updated_at.strftime('%Y/%m/%d') %> : </div>
+    <div><%= image_tag @parking.user.get_profile_image(50,50) %> <%= @parking.updated_at.strftime('%Y/%m/%d') %> : 
       <% if user_signed_in?  %>
         <%= link_to @parking.user.user_name, public_user_path(@parking.user.id) %>
       <% else %>
@@ -40,14 +40,15 @@
       <% if @parking.user.age_type.present? %>
         <%= @parking.user.age_type %> 歳
       <% else %>
-        <div>年齢非公開</div>
+        <a>年齢非公開</a>
       <% end %> /
 
       <% if @parking.user.living_prefecture.present? %>
        <%= @parking.user.living_prefecture %>
       <% else %>
-        <div>居住地非公開</div>
+        <a>居住地非公開</a>
       <% end %>
+      </div>
   </div>
 
   <% if @parking.user == current_user %>
@@ -162,9 +163,15 @@
            <%= post_comment.user.user_name %>
         <% end %>
        <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-       <% if post_comment.user == current_user %>
+
+      <% if admin_signed_in? %>
         <%= link_to "×", public_parking_post_comment_path(post_comment.parking, post_comment), method: :delete %>
+      <% else %>
+        <% if post_comment.user == current_user %>
+          <%= link_to "×", public_parking_post_comment_path(post_comment.parking, post_comment), method: :delete %>
+        <% end %>
       <% end %>
+
       <div><%= post_comment.comment %></div>
       </div>
 

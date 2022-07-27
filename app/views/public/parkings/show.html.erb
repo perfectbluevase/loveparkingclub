@@ -30,7 +30,7 @@
   </div>
 
   <div style= "padding-top: 20px">
-    <div><%= image_tag @parking.user.get_profile_image(50,50) %> <%= @parking.updated_at.strftime('%Y/%m/%d') %> : </div>
+    <div><%= image_tag @parking.user.get_profile_image(50,50) %> <%= @parking.updated_at.strftime('%Y/%m/%d') %> : 
       <% if user_signed_in?  %>
         <%= link_to @parking.user.user_name, public_user_path(@parking.user.id) %>
       <% else %>
@@ -40,14 +40,15 @@
       <% if @parking.user.age_type.present? %>
         <%= @parking.user.age_type %> 歳
       <% else %>
-        <div>年齢非公開</div>
+        <a>年齢非公開</a>
       <% end %> /
 
       <% if @parking.user.living_prefecture.present? %>
        <%= @parking.user.living_prefecture %>
       <% else %>
-        <div>居住地非公開</div>
+        <a>居住地非公開</a>
       <% end %>
+      </div>
   </div>
 
   <% if @parking.user == current_user %>

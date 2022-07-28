@@ -1,0 +1,201 @@
+<div class= "container p-5" >
+
+  <% if admin_signed_in? %>
+      <h1>
+      <%= link_to "投稿を削除", admin_parking_path(@parking.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+      </h1>
+  <% end %>
+
+  <div class= "row">
+
+    <div class= "col-6 align-self-center">
+      <%= image_tag @parking.get_image, :size => '500x500' %>
+    </div>
+
+    <div class= "col-6">
+      <h3>駐車場名：<%= @parking.parking_name %></h3>
+      <div>
+        <p>住所：<%= @parking.parking_address %></p>
+        <p>運営会社：<%= @parking.parking_operator %></p>
+        <p>駐車場情報：<br><%= @parking.parking_fee_info %></p>
+        <p>コメント：<br><%= @parking.parking_review %></p>
+        <p>タグ：
+            <% @parking.tags.each do |hash_tag| %>
+              <%= link_to hash_tag.name, public_parkings_path(oreno_hash_tag: hash_tag.name) %>
+            <% end %>
+        </p>
+      </div>
+    <div>
+
+  </div>
+
+  <div style= "padding-top: 20px">
+    <div><%= image_tag @parking.user.get_profile_image(50,50) %> <%= @parking.updated_at.strftime('%Y/%m/%d') %> : 
+      <% if user_signed_in?  %>
+        <%= link_to @parking.user.user_name, public_user_path(@parking.user.id) %>
+      <% else %>
+        <%= @parking.user.user_name %>
+      <% end %> /
+
+      <% if @parking.user.age_type.present? %>
+        <%= @parking.user.age_type %> 歳
+      <% else %>
+        <a>年齢非公開</a>
+      <% end %> /
+
+      <% if @parking.user.living_prefecture.present? %>
+       <%= @parking.user.living_prefecture %>
+      <% else %>
+        <a>居住地非公開</a>
+      <% end %>
+      </div>
+  </div>
+
+  <% if @parking.user == current_user %>
+    <%= link_to "Edit", edit_public_parking_path(@parking) %> |
+    <%= link_to "Delete", public_parking_path(@parking), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+  <% end %>
+
+
+
+  <div style= "padding-top: 20px">
+    <% if user_signed_in?  %>
+      <% if @parking.bookmarked_by?(current_user) %>
+        <td><%= link_to image_tag("kiss-12.png", size: '60x40'), public_parking_book_mark_path(@parking), method: :delete %></td>
+        <!--<td><%= link_to "(´ε｀ )♥", public_parking_book_mark_path(@parking), method: :delete %></td>-->
+      <% else %>
+        <td><%= link_to image_tag("kiss-13.png", size: '60x40'), public_parking_book_marks_path(@parking), method: :post %></td>
+        <!--<td><%= link_to "YOU LIKE IT?", public_parking_book_marks_path(@parking), method: :post %></td>-->
+      <% end %>
+    <% else %>
+    <% end %>
+  </div>
+
+
+</div>
+
+
+</div>
+
+
+  <div class= "row">
+
+    <div class= "col-6">
+
+
+  <!-- ここから Google map の実装 -->
+  <!--参照 ： https://qiita.com/nagase_toya/items/e49977efb686ed05eadb-->
+  <input id="address" type="hidden" value="<%= @parking.parking_address %>">
+
+  <div id='map'></div>
+
+  <style>
+  #map {
+    height: 300px;
+    width: 500px;
+  }
+  </style>
+
+  <script>
+  let map
+  function initMap(){
+    geocoder = new google.maps.Geocoder()
+
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: {lat: 40.7828, lng:-73.9653},
+      zoom: 12,
+    });
+
+    marker = new google.maps.Marker({
+      position:  {lat: 40.7828, lng:-73.9653},
+      map: map
+    });
+  }
+
+  let geocoder
+
+
+  function codeAddress(){
+    let inputAddress = document.getElementById('address').value;
+
+    geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+      if (status == 'OK') {
+        map.setCenter(results[0].geometry.location);
+        var marker = new google.maps.Marker({
+            map: map,
+            position: results[0].geometry.location
+        });
+      } else {
+        alert('該当する住所のマップを表示できません：' + status);
+      }
+    });
+  }
+
+  // ①turbolinksが読み込まれるタイミング
+  // ②ページが読み込まれる
+  // ③codeAddress関数を実行する
+  document.addEventListener('turbolinks:load', function() {
+
+  window.addEventListener('load', function(){
+    codeAddress()
+		});
+  })
+
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6Zb50uhc-JY0geObpW8AaFljB5vi8scQ&callback=initMap" async defer></script>
+  </div>
+  <!-- ここまで Google map の実装 -->
+
+
+     <div class= "col-6">
+
+  <div style= "border: solid 5px rgb(0, 255, 0) ">
+
+    <div style= "padding: 15px"><%= @parking.post_comments.count %> comments</div>
+
+    <% @parking.post_comments.each do |post_comment| %>
+     <div style= "padding: 15px">
+     <div style= "border-bottom: dotted">
+       <%= image_tag post_comment.user.get_profile_image(30,30) %>
+         <% if user_signed_in?  %>
+          <%= link_to post_comment.user.user_name, public_user_path(post_comment.user.id) %>
+        <% else %>
+           <%= post_comment.user.user_name %>
+        <% end %>
+       <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+
+      <% if admin_signed_in? %>
+        <%= link_to "×", public_parking_post_comment_path(post_comment.parking, post_comment), method: :delete %>
+      <% else %>
+        <% if post_comment.user == current_user %>
+          <%= link_to "×", public_parking_post_comment_path(post_comment.parking, post_comment), method: :delete %>
+        <% end %>
+      <% end %>
+
+      <div><%= post_comment.comment %></div>
+      </div>
+
+      </div>
+    <% end %>
+
+     <% if user_signed_in?  %>
+      <div style= "padding: 15px">
+        <% if @post_comment.errors.any? %>
+         <div>コメントを入力してください！</div>
+        <% end %>
+        <%= form_with model: [@parking, @post_comment],url: public_parking_post_comments_path(@parking.id) do |f| %>
+          <div class= "col"><%= f.text_area :comment, rows: '', placeholder: "Say HI to others", size: "45x2" %></div>
+          <div class= "col"><%= f.submit "TALK!", class: 'rounded-0' %></div>
+        <% end %>
+      <% end %>
+      </div>
+
+
+  </div>
+     </div>
+  </div>
+
+  </div>
+
+</div>
+

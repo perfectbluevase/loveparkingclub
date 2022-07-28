@@ -1,0 +1,36 @@
+<div class= "container">
+  
+  <h1>メンバーズ一覧</h1>
+  
+  <table class="table">
+    
+    <thead>
+      <tr>
+        <th>ユーザーID</th>
+        <th>ユーザーネーム</th>
+        <th>会員ステータス</th>
+      </tr>
+    </thead>
+    
+    <% @users.each do |user| %>
+    <tbody>
+      <tr>
+          <td>
+            <%= link_to admin_user_path(user.id) do %>
+            <%= user.id %>
+            <% end %>
+          </td>
+          <td><%= user.user_name %></td>
+          <td>
+            <% if user.is_deleted? == false %>
+            <a>アカウント有効</a>
+            <% else %>
+            <a>退会済</a>
+            <% end %>
+          </td>
+      </tr>
+    </tbody>
+    <% end %>
+  </table>
+
+</div>

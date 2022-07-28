@@ -1,0 +1,39 @@
+
+<div class= "container">
+  <% if params[:oreno_hash_tag].present? %>
+    <h3>Posts having <%= params[:oreno_hash_tag] %></h3>
+  <% end %>
+</div>
+
+<div class= "container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">駐車場名</th>
+        <th scope="col">住所</th>
+        <th scope="col">サービス詳細</th>
+        <th scope="col">タグ</th>
+      </tr>
+    </thead>
+    <% @parkings.each do |parking| %>
+      <tbody>
+        <tr>
+          <th scope="row">
+            <!--↓data: {"turbolinks" => false}追加-->
+            <%= link_to public_parking_path(parking.id), data: {"turbolinks" => false} do %>
+            <%= parking.parking_name %>
+            <% end %>
+          </th>
+          <td><%= parking.parking_address %></td>
+          <!--, data: {"turbolinks" => false} → link_toのturbolinksをオフにしてリロードが行われGマップが表示される-->
+          <td><%= parking.parking_fee_info %></td>
+          <td>
+            <% parking.tags.each do |hash_tag| %>
+              <%= link_to hash_tag.name, public_parkings_path(oreno_hash_tag: hash_tag.name) %>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+</div>

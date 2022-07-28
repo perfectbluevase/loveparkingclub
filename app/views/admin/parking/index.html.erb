@@ -1,0 +1,28 @@
+<div class= "container">
+  
+  <h1>投稿一覧</h1>
+  
+  <table class="table">
+    
+    <thead>
+      <tr>
+        <th>投稿ID</th>
+        <th>パーキング名</th>
+      </tr>
+    </thead>
+    
+    <% @parkings.each do |parking| %>
+    <tbody>
+      <tr>
+          <td>
+            <%= link_to public_parking_path(parking.id) do %>
+            <%= parking.id %>
+            <% end %>
+          </td>
+          <td><%= parking.parking_name %></td>
+      </tr>
+    </tbody>
+    <% end %>
+  </table>
+
+</div>
